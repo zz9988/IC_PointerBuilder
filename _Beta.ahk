@@ -1,0 +1,14 @@
+OfflineBetaPointers["472.1"] := new GameMemoryData
+OfflineBetaPointers["472.1"].is64 := True
+OfflineBetaPointers["472.1"].IdleGameManager.moduleAddress := 0x00491A90
+OfflineBetaPointers["472.1"].IdleGameManager.moduleOffset := [0xC98]
+OfflineBetaPointers["472.1"].GameSettings.moduleAddress := 0x00493E40
+OfflineBetaPointers["472.1"].GameSettings.moduleOffset := [0x820]
+OfflineBetaPointers["472.1"].GameSettings.staticOffset := 0xA80
+OfflineBetaPointers["472.1"].EngineSettings.moduleAddress := 0x004A3658
+OfflineBetaPointers["472.1"].EngineSettings.moduleOffset :=[0x2A0]
+OfflineBetaPointers["472.1"].EngineSettings.staticOffset := 0xF60
+OfflineBetaPointers["472.1"].DialogManager.moduleAddress := 0x00495C70
+OfflineBetaPointers["472.1"].DialogManager.moduleOffset := [0x9D0]
+OfflineBetaPointers["472.1"].CrusadersGameDataSet.moduleAddress := 0x004A33B8
+OfflineBetaPointers["472.1"].CrusadersGameDataSet.moduleOffset := [0x210, 0xBC0]
