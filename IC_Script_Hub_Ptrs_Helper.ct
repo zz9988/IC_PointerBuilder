@@ -1,0 +1,1893 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>298</ID>
+      <Description>"IdleGameManager (EGS)"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>mono-2.0-bdwgc.dll+0x00491A90</Address>
+      <Offsets>
+        <Offset>0xD8</Offset>
+        <Offset>0xC88</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>823</ID>
+      <Description>"IdleGameManager EGS 64 bit v462"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"mono-2.0-bdwgc.dll"+0x00491A90</Address>
+      <Offsets>
+        <Offset>0</Offset>
+        <Offset>C88</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>822</ID>
+      <Description>"IdleGameManager Steam 64 bit v463"</Description>
+      <LastState Value="1712467088" RealAddress="2B1646BFF00"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"mono-2.0-bdwgc.dll"+0x00495A90</Address>
+      <Offsets>
+        <Offset>0</Offset>
+        <Offset>Cb0</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>302</ID>
+      <Description>"Resolve Static GameSettings"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <Color>FF0000</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+label(GameSettings.threadexit)
+label(classname)
+label(namespace)
+label(assemblyname)
+label(status)
+label(domain)
+label(assembly)
+label(GameSettings.Static)
+label(GameSettings.Class)
+alloc(GameSettings.threadstart, 2048, mono-2.0-bdwgc.mono_thread_attach)
+
+registersymbol(GameSettings.Static)
+registersymbol(GameSettings.Class)
+
+GameSettings.threadstart:
+sub rsp,28
+
+xor rax,rax
+mov [GameSettings.Class],rax
+mov [GameSettings.Static],rax
+
+call mono-2.0-bdwgc.mono_get_root_domain
+cmp rax,0
+je GameSettings.threadexit
+mov [domain],rax
+
+mov rcx,[domain]
+call mono-2.0-bdwgc.mono_thread_attach
+
+mov rcx,assemblyname
+mov rdx,status
+call mono-2.0-bdwgc.mono_assembly_load_with_partial_name
+cmp rax,0
+je GameSettings.threadexit
+
+mov rcx,rax
+call mono-2.0-bdwgc.mono_assembly_get_image
+cmp rax,0
+je GameSettings.threadexit
+mov [assembly], rax
+
+mov rcx,eax
+mov rdx,namespace
+mov r8,classname
+
+call mono-2.0-bdwgc.mono_class_from_name_case
+cmp rax,0
+je GameSettings.threadexit
+mov [GameSettings.Class],rax
+
+mov rcx,[domain]
+mov rdx,rax
+call mono-2.0-bdwgc.mono_class_vtable
+cmp rax,0
+je GameSettings.threadexit
+
+mov rcx,rax
+call mono-2.0-bdwgc.mono_vtable_get_static_field_data
+
+mov [GameSettings.Static],rax
+jmp GameSettings.threadexit
+///////////////////////////////////////////////////////
+// Data section
+GameSettings.Static:
+dq 0
+GameSettings.Class:
+dq 0
+assemblyname:
+db 'Assembly-CSharp',0
+namespace:
+db 'CrusadersGame',0
+classname:
+db 'GameSettings',0
+status:
+dq 0
+domain:
+dq 0
+assembly:
+dq 0
+
+GameSettings.threadexit:
+add rsp,28
+ret
+createthread(GameSettings.threadstart)
+
+[DISABLE]
+unregistersymbol(GameSettings.Static)
+unregistersymbol(GameSettings.Class)
+dealloc(GameSettings.threadstart)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>303</ID>
+          <Description>"GameSettings.Static"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Pointer</VariableType>
+          <Address>[GameSettings.Static]</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>304</ID>
+          <Description>"GameSettings.Class"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Pointer</VariableType>
+          <Address>[GameSettings.Class]</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>305</ID>
+          <Description>"_instance"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Pointer</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>418</ID>
+          <Description>"_instance.InstanceID"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>0x18</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>306</ID>
+          <Description>"_lock"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>307</ID>
+          <Description>"SupportLinkURL"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>10</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>308</ID>
+          <Description>"ForumURL"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>18</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>309</ID>
+          <Description>"FeedbackURL"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>20</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>310</ID>
+          <Description>"NewsletterURL"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>28</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>311</ID>
+          <Description>"PrivacyURL"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>30</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>312</ID>
+          <Description>"TwitchLinkURL"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>38</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>313</ID>
+          <Description>"UserID"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>40</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>314</ID>
+          <Description>"UnlinkedUserID"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>44</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>315</ID>
+          <Description>"Hash"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>48</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>316</ID>
+          <Description>"DL"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>50</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>317</ID>
+          <Description>"Platform"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>58</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>318</ID>
+          <Description>"PlatformID"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>60</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>319</ID>
+          <Description>"MobileClientVersion"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>68</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>320</ID>
+          <Description>"VersionPostFix"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>70</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>321</ID>
+          <Description>"ISLOCAL"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>78</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>322</ID>
+          <Description>"DefaultScreenWidth"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>7C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>323</ID>
+          <Description>"DefaultScreenHeight"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>80</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>324</ID>
+          <Description>"ResolutionWidth"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>84</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>325</ID>
+          <Description>"ResolutionHeight"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>88</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>326</ID>
+          <Description>"IsFullscreen"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>8C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>327</ID>
+          <Description>"UIScale"</Description>
+          <VariableType>Double</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>90</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>328</ID>
+          <Description>"TargetFramerate"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>98</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>329</ID>
+          <Description>"ReduceFramerateWhenNotInFocus"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>9C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>330</ID>
+          <Description>"HidePhoneLoadPopup"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>9D</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>331</ID>
+          <Description>"IsTwitchPlays"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>9E</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>332</ID>
+          <Description>"TwitchPlaysListenChannel"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>A0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>333</ID>
+          <Description>"TwitchPlaysNickname"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>A8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>334</ID>
+          <Description>"TwitchPlaysOAuth"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>B0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>335</ID>
+          <Description>"PercentOfParticlesSpawned"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>B8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>336</ID>
+          <Description>"IsSwitch"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>BC</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>337</ID>
+          <Description>"IsXBox"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>BD</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>338</ID>
+          <Description>"IsPlayStation"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>BE</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>339</ID>
+          <Description>"IsGamepadDesktop"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>BF</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>340</ID>
+          <Description>"UseUnityPurchasing"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>341</ID>
+          <Description>"PackageScreenshotMode"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C1</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>342</ID>
+          <Description>"TankingAndHealingChanges"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C2</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>343</ID>
+          <Description>"BetterOfflineGold"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C3</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>344</ID>
+          <Description>"NewDPS"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C4</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>345</ID>
+          <Description>"Y1Rebalance"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C5</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>346</ID>
+          <Description>"Y1RebalancePart2"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C6</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>347</ID>
+          <Description>"PatronSystemEnabled"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C7</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>348</ID>
+          <Description>"TrialsSystemEnabled"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>349</ID>
+          <Description>"TrialsSystemUnlocked"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C9</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>350</ID>
+          <Description>"LegendarySystemEnabled"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>CA</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>351</ID>
+          <Description>"ShowTwitchUI"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>CB</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>352</ID>
+          <Description>"IsStreamingForDrops"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>CC</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>353</ID>
+          <Description>"MultiInstance"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>CD</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>354</ID>
+          <Description>"ModronPurchasesEnabled"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>CE</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>355</ID>
+          <Description>"WebGLTransfersEnabled"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>CF</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>356</ID>
+          <Description>"WebGLPurchasesWarningEnabled"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>D0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>357</ID>
+          <Description>"WebGLPurchasesDisabled"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>D1</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>358</ID>
+          <Description>"Party2RebalanceTech"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>D2</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>359</ID>
+          <Description>"OtherRebalanceTech"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>D3</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>360</ID>
+          <Description>"NewCodeRedemption"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>D4</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>361</ID>
+          <Description>"ChatOpen"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>D5</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>362</ID>
+          <Description>"ChatPoppedOut"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>D6</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>363</ID>
+          <Description>"ChatWidth"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>D8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>364</ID>
+          <Description>"ChatHeight"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>DC</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>365</ID>
+          <Description>"ChatX"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>E0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>366</ID>
+          <Description>"ChatY"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>E4</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>367</ID>
+          <Description>"ChatUserListHeight"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>E8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>368</ID>
+          <Description>"ChatServerID"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>EC</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>369</ID>
+          <Description>"ChatInstanceID"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>F0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>370</ID>
+          <Description>"ShowJukebox"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>F4</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>371</ID>
+          <Description>"JukeboxOpen"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>F5</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>372</ID>
+          <Description>"JukeboxWidth"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>F8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>373</ID>
+          <Description>"JukeboxHeight"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>FC</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>374</ID>
+          <Description>"UseConsolePortraits"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>100</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>375</ID>
+          <Description>"NarrowHeroBoxes"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>101</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>376</ID>
+          <Description>"RememberMe"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>102</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>377</ID>
+          <Description>"LastCNEEmail"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>108</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>378</ID>
+          <Description>"LoggedInCNEID"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>110</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>379</ID>
+          <Description>"LoggedInCNEHash"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>118</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>380</ID>
+          <Description>"ShowOnlyOwnedFamiliars"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>120</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>381</ID>
+          <Description>"ShowOnlyUnassignedFamiliars"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>121</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>382</ID>
+          <Description>"preventScreenDimming"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>122</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>383</ID>
+          <Description>"MaxGemDigitsBeforeScientific"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>124</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>384</ID>
+          <Description>"MaxEventCurrencyDigitsBeforeScientific"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>128</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>385</ID>
+          <Description>"MaxWelcomeBackNotificationDigitsBeforeScientific"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>12C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>386</ID>
+          <Description>"MaxChestDigitsBeforeScientific"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>130</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>387</ID>
+          <Description>"MaxBGInstances"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>134</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>388</ID>
+          <Description>"uiCaching"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>138</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>389</ID>
+          <Description>"LevelupAmountIndex"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>13C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>390</ID>
+          <Description>"IsQA"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>140</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>391</ID>
+          <Description>"SoundVolume"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>144</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>392</ID>
+          <Description>"SoundMuted"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>148</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>393</ID>
+          <Description>"DontShowSoftCurrencyWarning"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>149</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>394</ID>
+          <Description>"DontShowUpgradeWarning"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>14A</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>395</ID>
+          <Description>"DontShowTimeGatePatronWarning"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>14B</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>396</ID>
+          <Description>"DontShowEventPatronWarning"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>14C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>397</ID>
+          <Description>"razerSupport"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>14D</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>398</ID>
+          <Description>"RazerSupportChanged"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Pointer</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>150</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>399</ID>
+          <Description>"UIMode"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>158</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>400</ID>
+          <Description>"qolUpdateState"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>15C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>401</ID>
+          <Description>"&lt;OverrideUseOfflineProgression&gt;k__BackingField"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>15D</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>402</ID>
+          <Description>"CNESignupURL"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>160</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>403</ID>
+          <Description>"CNEForgotURL"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>168</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>404</ID>
+          <Description>"UpgradePopupMaxEffectDescriptionLength"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>170</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>405</ID>
+          <Description>"AllowSave"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>174</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>406</ID>
+          <Description>"RateURLIOS"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>178</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>407</ID>
+          <Description>"RateURLAndroid"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>180</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>408</ID>
+          <Description>"SocialLocalUserId"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>188</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>409</ID>
+          <Description>"SocialLocalUserName"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>190</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>410</ID>
+          <Description>"IosAppAdKey"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>198</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>411</ID>
+          <Description>"AndroidAppAdKey"</Description>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>C</Offset>
+            <Offset>1A0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>412</ID>
+          <Description>"TwitchPlaysListenChannels"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Pointer</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>1A8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>413</ID>
+          <Description>"AdminViewAccountMode"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>1B0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>414</ID>
+          <Description>"HasOfflineProgress"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>1B1</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>415</ID>
+          <Description>"AlwaysProgressOffline"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>1B2</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>416</ID>
+          <Description>"UseNewTimegates"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>1B3</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>417</ID>
+          <Description>"UseFastChampionRecall"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>GameSettings.Static</Address>
+          <Offsets>
+            <Offset>1B4</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>438</ID>
+      <Description>"Resolve Static EngineSettings"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <Color>FF0000</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+label(EngineSettings.threadexit)
+label(classname)
+label(namespace)
+label(assemblyname)
+label(status)
+label(domain)
+label(assembly)
+label(EngineSettings.Static)
+label(EngineSettings.Class)
+alloc(EngineSettings.threadstart, 2048, mono-2.0-bdwgc.mono_thread_attach)
+
+registersymbol(EngineSettings.Static)
+registersymbol(EngineSettings.Class)
+
+EngineSettings.threadstart:
+sub rsp,28
+
+xor rax,rax
+mov [EngineSettings.Class],rax
+mov [EngineSettings.Static],rax
+
+call mono-2.0-bdwgc.mono_get_root_domain
+cmp rax,0
+je EngineSettings.threadexit
+mov [domain],rax
+
+mov rcx,[domain]
+call mono-2.0-bdwgc.mono_thread_attach
+
+mov rcx,assemblyname
+mov rdx,status
+call mono-2.0-bdwgc.mono_assembly_load_with_partial_name
+cmp rax,0
+je EngineSettings.threadexit
+
+mov rcx,rax
+call mono-2.0-bdwgc.mono_assembly_get_image
+cmp rax,0
+je EngineSettings.threadexit
+mov [assembly], rax
+
+mov rcx,eax
+mov rdx,namespace
+mov r8,classname
+
+call mono-2.0-bdwgc.mono_class_from_name_case
+cmp rax,0
+je EngineSettings.threadexit
+mov [EngineSettings.Class],rax
+
+mov rcx,[domain]
+mov rdx,rax
+call mono-2.0-bdwgc.mono_class_vtable
+cmp rax,0
+je EngineSettings.threadexit
+
+mov rcx,rax
+call mono-2.0-bdwgc.mono_vtable_get_static_field_data
+
+mov [EngineSettings.Static],rax
+jmp EngineSettings.threadexit
+///////////////////////////////////////////////////////
+// Data section
+EngineSettings.Static:
+dq 0
+EngineSettings.Class:
+dq 0
+assemblyname:
+db 'Assembly-CSharp',0
+namespace:
+db 'UnityGameEngine.Core',0
+classname:
+db 'EngineSettings',0
+status:
+dq 0
+domain:
+dq 0
+assembly:
+dq 0
+
+EngineSettings.threadexit:
+add rsp,28
+ret
+createthread(EngineSettings.threadstart)
+
+[DISABLE]
+unregistersymbol(EngineSettings.Static)
+unregistersymbol(EngineSettings.Class)
+dealloc(EngineSettings.threadstart)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>439</ID>
+          <Description>"EngineSettings.Static"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Pointer</VariableType>
+          <Address>[EngineSettings.Static]</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>440</ID>
+          <Description>"EngineSettings.Class"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Pointer</VariableType>
+          <Address>[EngineSettings.Class]</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>441</ID>
+          <Description>"_instance"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Pointer</VariableType>
+          <Address>EngineSettings.Static</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>442</ID>
+          <Description>"_lock"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>EngineSettings.Static</Address>
+          <Offsets>
+            <Offset>8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>443</ID>
+          <Description>"WebRoot"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>EngineSettings.Static</Address>
+          <Offsets>
+            <Offset>14</Offset>
+            <Offset>10</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>444</ID>
+          <Description>"AssetRoot"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>EngineSettings.Static</Address>
+          <Offsets>
+            <Offset>14</Offset>
+            <Offset>18</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>445</ID>
+          <Description>"LocalAssetRoot"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>String</VariableType>
+          <Length>80</Length>
+          <Unicode>1</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>EngineSettings.Static</Address>
+          <Offsets>
+            <Offset>14</Offset>
+            <Offset>20</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>446</ID>
+          <Description>"ScreenWidth"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>EngineSettings.Static</Address>
+          <Offsets>
+            <Offset>28</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>447</ID>
+          <Description>"ScreenHeight"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>EngineSettings.Static</Address>
+          <Offsets>
+            <Offset>2C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>448</ID>
+          <Description>"LanguageID"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>EngineSettings.Static</Address>
+          <Offsets>
+            <Offset>30</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>449</ID>
+          <Description>"ActiveGameUser"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Pointer</VariableType>
+          <Address>EngineSettings.Static</Address>
+          <Offsets>
+            <Offset>38</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>450</ID>
+          <Description>"Active2dScene"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>EngineSettings.Static</Address>
+          <Offsets>
+            <Offset>40</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>451</ID>
+          <Description>"AllowTextureCompression"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>EngineSettings.Static</Address>
+          <Offsets>
+            <Offset>44</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>452</ID>
+          <Description>"AllowLiveEffects"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>EngineSettings.Static</Address>
+          <Offsets>
+            <Offset>45</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>453</ID>
+          <Description>"IsConsole"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>EngineSettings.Static</Address>
+          <Offsets>
+            <Offset>46</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>454</ID>
+          <Description>"IsAdmin"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>EngineSettings.Static</Address>
+          <Offsets>
+            <Offset>47</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>455</ID>
+          <Description>"JSONDefaults"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Pointer</VariableType>
+          <Address>EngineSettings.Static</Address>
+          <Offsets>
+            <Offset>48</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>456</ID>
+          <Description>"Default2DCamera"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Pointer</VariableType>
+          <Address>EngineSettings.Static</Address>
+          <Offsets>
+            <Offset>50</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>824</ID>
+      <Description>"Resolve CrusadersGameDataSet"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <Color>FF0000</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+label(CrusadersGameDataSet.threadexit)
+label(classname)
+label(namespace)
+label(assemblyname)
+label(status)
+label(domain)
+label(assembly)
+label(CrusadersGameDataSet.Static)
+label(CrusadersGameDataSet.Class)
+alloc(CrusadersGameDataSet.threadstart, 2048, mono-2.0-bdwgc.mono_thread_attach)
+
+registersymbol(CrusadersGameDataSet.Static)
+registersymbol(CrusadersGameDataSet.Class)
+
+CrusadersGameDataSet.threadstart:
+sub rsp,28
+
+xor rax,rax
+mov [CrusadersGameDataSet.Class],rax
+mov [CrusadersGameDataSet.Static],rax
+
+call mono-2.0-bdwgc.mono_get_root_domain
+cmp rax,0
+je CrusadersGameDataSet.threadexit
+mov [domain],rax
+
+mov rcx,[domain]
+call mono-2.0-bdwgc.mono_thread_attach
+
+mov rcx,assemblyname
+mov rdx,status
+call mono-2.0-bdwgc.mono_assembly_load_with_partial_name
+cmp rax,0
+je CrusadersGameDataSet.threadexit
+
+mov rcx,rax
+call mono-2.0-bdwgc.mono_assembly_get_image
+cmp rax,0
+je CrusadersGameDataSet.threadexit
+mov [assembly], rax
+
+mov rcx,eax
+mov rdx,namespace
+mov r8,classname
+
+call mono-2.0-bdwgc.mono_class_from_name_case
+cmp rax,0
+je CrusadersGameDataSet.threadexit
+mov [CrusadersGameDataSet.Class],rax
+
+mov rcx,[domain]
+mov rdx,rax
+call mono-2.0-bdwgc.mono_class_vtable
+cmp rax,0
+je CrusadersGameDataSet.threadexit
+
+mov rcx,rax
+call mono-2.0-bdwgc.mono_vtable_get_static_field_data
+
+mov [CrusadersGameDataSet.Static],rax
+jmp CrusadersGameDataSet.threadexit
+///////////////////////////////////////////////////////
+// Data section
+CrusadersGameDataSet.Static:
+dq 0
+CrusadersGameDataSet.Class:
+dq 0
+assemblyname:
+db 'Assembly-CSharp',0
+namespace:
+db 'CrusadersGame.Defs',0
+classname:
+db 'CrusadersGameDataSet',0
+status:
+dq 0
+domain:
+dq 0
+assembly:
+dq 0
+
+CrusadersGameDataSet.threadexit:
+add rsp,28
+ret
+createthread(CrusadersGameDataSet.threadstart)
+
+[DISABLE]
+unregistersymbol(CrusadersGameDataSet.Static)
+unregistersymbol(CrusadersGameDataSet.Class)
+dealloc(CrusadersGameDataSet.threadstart)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>825</ID>
+          <Description>"CrusadersGameDataSet.Static"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Pointer</VariableType>
+          <Address>[CrusadersGameDataSet.Static]</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>826</ID>
+          <Description>"CrusadersGameDataSet.Class"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Pointer</VariableType>
+          <Address>[CrusadersGameDataSet.Class]</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>827</ID>
+          <Description>"_instance"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Pointer</VariableType>
+          <Address>CrusadersGameDataSet.Static</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>828</ID>
+          <Description>"_lock"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>CrusadersGameDataSet.Static</Address>
+          <Offsets>
+            <Offset>8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>829</ID>
+          <Description>"UpgradesByHero"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Pointer</VariableType>
+          <Address>CrusadersGameDataSet.Static</Address>
+          <Offsets>
+            <Offset>10</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>830</ID>
+      <Description>"Resolve DialogManager"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <Color>FF0000</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+label(DialogManager.threadexit)
+label(classname)
+label(namespace)
+label(assemblyname)
+label(status)
+label(domain)
+label(assembly)
+label(DialogManager.Static)
+label(DialogManager.Class)
+alloc(DialogManager.threadstart, 2048, mono-2.0-bdwgc.mono_thread_attach)
+
+registersymbol(DialogManager.Static)
+registersymbol(DialogManager.Class)
+
+DialogManager.threadstart:
+sub rsp,28
+
+xor rax,rax
+mov [DialogManager.Class],rax
+mov [DialogManager.Static],rax
+
+call mono-2.0-bdwgc.mono_get_root_domain
+cmp rax,0
+je DialogManager.threadexit
+mov [domain],rax
+
+mov rcx,[domain]
+call mono-2.0-bdwgc.mono_thread_attach
+
+mov rcx,assemblyname
+mov rdx,status
+call mono-2.0-bdwgc.mono_assembly_load_with_partial_name
+cmp rax,0
+je DialogManager.threadexit
+
+mov rcx,rax
+call mono-2.0-bdwgc.mono_assembly_get_image
+cmp rax,0
+je DialogManager.threadexit
+mov [assembly], rax
+
+mov rcx,eax
+mov rdx,namespace
+mov r8,classname
+
+call mono-2.0-bdwgc.mono_class_from_name_case
+cmp rax,0
+je DialogManager.threadexit
+mov [DialogManager.Class],rax
+
+mov rcx,[domain]
+mov rdx,rax
+call mono-2.0-bdwgc.mono_class_vtable
+cmp rax,0
+je DialogManager.threadexit
+
+mov rcx,rax
+call mono-2.0-bdwgc.mono_vtable_get_static_field_data
+
+mov [DialogManager.Static],rax
+jmp DialogManager.threadexit
+///////////////////////////////////////////////////////
+// Data section
+DialogManager.Static:
+dq 0
+DialogManager.Class:
+dq 0
+assemblyname:
+db 'Assembly-CSharp',0
+namespace:
+db 'UnityGameEngine.Dialogs',0
+classname:
+db 'DialogManager',0
+status:
+dq 0
+domain:
+dq 0
+assembly:
+dq 0
+
+DialogManager.threadexit:
+add rsp,28
+ret
+createthread(DialogManager.threadstart)
+
+[DISABLE]
+unregistersymbol(DialogManager.Static)
+unregistersymbol(DialogManager.Class)
+dealloc(DialogManager.threadstart)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>831</ID>
+          <Description>"DialogManager.Static"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Pointer</VariableType>
+          <Address>[DialogManager.Static]</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>832</ID>
+          <Description>"DialogManager.Class"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Pointer</VariableType>
+          <Address>[DialogManager.Class]</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>833</ID>
+          <Description>"_instance"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Pointer</VariableType>
+          <Address>DialogManager.Static</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>834</ID>
+          <Description>"_lock"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>DialogManager.Static</Address>
+          <Offsets>
+            <Offset>8</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="CrusadersGame.Defs.CrusadersGameDataSet.Static" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="_instance" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000008" Description="_lock" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="UpgradesByHero" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="UnityGameEngine.Dialogs.DialogManager.Static" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="_instance" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000008" Description="_lock" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>
